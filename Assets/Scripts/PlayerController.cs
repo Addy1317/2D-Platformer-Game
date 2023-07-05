@@ -8,30 +8,71 @@ namespace Outscal
     { 
         [Header("Animator Attribtes")]
         [SerializeField] private Animator _animator;
+        [SerializeField] private float _speed;
+
+        [Header("Physics Component")]
+        [SerializeField] private float _jumpForce;
+        private Rigidbody2D _rigidbody2D;
+
+
+        private void Awake()
+        {
+            _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        }
 
         private void Update()
         {
-            PlayerRun();
-            PlayerCrouch();
-            PlayerJump();
+            PlayerMovement();
+            PlayerCrouch();      
         }
 
-        private void PlayerRun()
+        private void PlayerMovement()
         {
-            float speed = Input.GetAxis("Horizontal");
-            _animator.SetFloat("Speed", Mathf.Abs(speed));
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Jump");
+
+            MoveCharacter(horizontal , vertical);
+            PlayerMovementAnimation(horizontal , vertical);
+        }
+
+        private void MoveCharacter(float horizontal, float vertical)
+        {
+            Vector3 position = transform.position;
+            position.x += horizontal * _speed * Time.deltaTime;
+            transform.position = position;
+
+           // Move Character vertically
+            if(vertical > 0)
+            {
+                _rigidbody2D.AddForce(new Vector2(0f, _jumpForce),ForceMode2D.Force);
+            }
+        }
+
+        private void PlayerMovementAnimation(float horizontal, float vertical)
+        {
+            _animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
             Vector3 scale = transform.localScale;
-            if (speed < 0)
+            if (horizontal < 0)
             {
                 scale.x = -1f * Mathf.Abs( scale.x);
             }
-            else if(speed > 0)
+            else if(horizontal > 0)
             {
                 scale.x = Mathf.Abs(scale.x);
             }
 
             transform.localScale = scale;
+
+            if (vertical > 0)
+            {
+                _animator.SetBool("Jump", true);
+                Debug.Log(_animator + "Jump");
+            }
+            else
+            {
+                _animator.SetBool("Jump", false);
+            }
         }
 
         private void PlayerCrouch()
@@ -44,21 +85,6 @@ namespace Outscal
             else
             {
                 _animator.SetBool("Crouch", false);
-            }
-        }
-
-        private void PlayerJump()
-        {
-            float VerticalInput = Input.GetAxis("Vertical");
-
-            if(VerticalInput > 0)
-            {
-                _animator.SetBool("Jump", true);
-                Debug.Log(_animator + "Jump");
-            }
-            else 
-            {
-                _animator.SetBool("Jump", false);
             }
         }
     }
