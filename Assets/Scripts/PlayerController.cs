@@ -5,14 +5,15 @@ using UnityEngine;
 namespace Outscal
 {
     public class PlayerController : MonoBehaviour
-    {
-
+    { 
         [Header("Animator Attribtes")]
         [SerializeField] private Animator _animator;
 
         private void Update()
         {
             PlayerRun();
+            PlayerCrouch();
+            PlayerJump();
         }
 
         private void PlayerRun()
@@ -33,7 +34,32 @@ namespace Outscal
             transform.localScale = scale;
         }
 
+        private void PlayerCrouch()
+        {
+            if(Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                _animator.SetBool("Crouch",true);
+                Debug.Log(_animator + "Crouch");   
+            }
+            else
+            {
+                _animator.SetBool("Crouch", false);
+            }
+        }
 
+        private void PlayerJump()
+        {
+            float VerticalInput = Input.GetAxis("Vertical");
 
+            if(VerticalInput > 0)
+            {
+                _animator.SetBool("Jump", true);
+                Debug.Log(_animator + "Jump");
+            }
+            else 
+            {
+                _animator.SetBool("Jump", false);
+            }
+        }
     }
 }
