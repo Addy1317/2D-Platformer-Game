@@ -6,18 +6,21 @@ namespace Outscal
 {
     public class PlayerController : MonoBehaviour
     { 
-        [Header("Animator Attribtes")]
+        [Header("Animator Attributes")]
         [SerializeField] private Animator _animator;
         [SerializeField] private float _speed;
 
         [Header("Physics Component")]
         [SerializeField] private float _jumpForce;
+        [SerializeField] private bool _isGrounded = true;
         private Rigidbody2D _rigidbody2D;
+        private BoxCollider2D _boxcollider2D;
 
 
         private void Awake()
         {
             _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+            _boxcollider2D = gameObject.GetComponent<BoxCollider2D>();
         }
 
         private void Update()
@@ -42,7 +45,7 @@ namespace Outscal
             transform.position = position;
 
            // Move Character vertically
-            if(vertical > 0)
+            if(vertical > 0 && _isGrounded)
             {
                 _rigidbody2D.AddForce(new Vector2(0f, _jumpForce),ForceMode2D.Force);
             }
@@ -64,7 +67,7 @@ namespace Outscal
 
             transform.localScale = scale;
 
-            if (vertical > 0)
+            if (vertical > 0 && _isGrounded)
             {
                 _animator.SetBool("Jump", true);
                 Debug.Log(_animator + "Jump");
@@ -85,6 +88,25 @@ namespace Outscal
             else
             {
                 _animator.SetBool("Crouch", false);
+            }
+        }
+
+     
+        private void OnCollisionStay2D(Collision2D other)
+        {
+            if (other.transform.tag == "Platform")
+            {
+                _isGrounded = true;
+                Debug.Log(_isGrounded + "TRUE");
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            if (other.transform.tag == "Platform")
+            {
+                _isGrounded = false;
+                Debug.Log(_isGrounded + "FALSE");
             }
         }
     }
