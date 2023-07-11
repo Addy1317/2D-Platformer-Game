@@ -12,10 +12,9 @@ namespace Outscal
 
         [Header("Physics Component")]
         [SerializeField] private float _jumpForce;
-        [SerializeField] private bool _isGrounded = true;
+        private bool _isGrounded = true;
         private Rigidbody2D _rigidbody2D;
         private BoxCollider2D _boxcollider2D;
-
 
         private void Awake()
         {
@@ -91,7 +90,6 @@ namespace Outscal
             }
         }
 
-     
         private void OnCollisionStay2D(Collision2D other)
         {
             if (other.transform.tag == "Platform")
