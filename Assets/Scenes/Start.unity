@@ -1757,6 +1757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1543914592}
   - component: {fileID: 1543914593}
+  - component: {fileID: 1543914594}
   m_Layer: 0
   m_Name: DeathCheck
   m_TagString: Untagged
@@ -1805,6 +1806,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 65, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1543914594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543914591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba42e8f1cb7eb9468fa9443cebce2c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1664443941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,8 +1827,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1664443942}
+  - component: {fileID: 1664443943}
   m_Layer: 0
-  m_Name: '[LevelController]'
+  m_Name: '[LevelManager]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1839,6 +1853,18 @@ Transform:
   m_Father: {fileID: 1405881998}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1664443943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664443941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252f211a711c01045bccc2b97f70143f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1938688150
 GameObject:
   m_ObjectHideFlags: 0
