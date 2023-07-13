@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,12 +17,13 @@ namespace Outscal
         private Rigidbody2D _rigidbody2D;
         private BoxCollider2D _boxcollider2D;
 
+        [Header("Score Attributes")]
+        [SerializeField] private ScoreController _scoreController;
         private void Awake()
         {
             _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
             _boxcollider2D = gameObject.GetComponent<BoxCollider2D>();
         }
-
         private void Update()
         {
             PlayerMovement();
@@ -36,7 +38,6 @@ namespace Outscal
             MoveCharacter(horizontal , vertical);
             PlayerMovementAnimation(horizontal , vertical);
         }
-
         private void MoveCharacter(float horizontal, float vertical)
         {
             Vector3 position = transform.position;
@@ -107,5 +108,12 @@ namespace Outscal
                 Debug.Log(_isGrounded + "FALSE");
             }
         }
+
+       public void PickUpKey()
+       {
+            Debug.Log("Player picked the Key");
+            _scoreController.IncrementScore(10);
+       }
+
     }
 }
