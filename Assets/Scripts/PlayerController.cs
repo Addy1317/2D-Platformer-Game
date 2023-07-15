@@ -1,12 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Outscal
 {
     public class PlayerController : MonoBehaviour
-    { 
+    {
         [Header("Animator Attributes")]
         [SerializeField] private Animator _animator;
         [SerializeField] private float _speed;
@@ -27,7 +25,7 @@ namespace Outscal
         private void Update()
         {
             PlayerMovement();
-            PlayerCrouch();      
+            PlayerCrouch();
         }
 
         private void PlayerMovement()
@@ -35,8 +33,8 @@ namespace Outscal
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Jump");
 
-            MoveCharacter(horizontal , vertical);
-            PlayerMovementAnimation(horizontal , vertical);
+            MoveCharacter(horizontal, vertical);
+            PlayerMovementAnimation(horizontal, vertical);
         }
         private void MoveCharacter(float horizontal, float vertical)
         {
@@ -44,10 +42,10 @@ namespace Outscal
             position.x += horizontal * _speed * Time.deltaTime;
             transform.position = position;
 
-           // Move Character vertically
-            if(vertical > 0 && _isGrounded)
+            // Move Character vertically
+            if (vertical > 0 && _isGrounded)
             {
-                _rigidbody2D.AddForce(new Vector2(0f, _jumpForce),ForceMode2D.Force);
+                _rigidbody2D.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Force);
             }
         }
 
@@ -58,9 +56,9 @@ namespace Outscal
             Vector3 scale = transform.localScale;
             if (horizontal < 0)
             {
-                scale.x = -1f * Mathf.Abs( scale.x);
+                scale.x = -1f * Mathf.Abs(scale.x);
             }
-            else if(horizontal > 0)
+            else if (horizontal > 0)
             {
                 scale.x = Mathf.Abs(scale.x);
             }
@@ -80,10 +78,10 @@ namespace Outscal
 
         private void PlayerCrouch()
         {
-            if(Input.GetKeyDown(KeyCode.LeftControl))
+            if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                _animator.SetBool("Crouch",true);
-                Debug.Log(_animator + "Crouch");   
+                _animator.SetBool("Crouch", true);
+                Debug.Log(_animator + "Crouch");
             }
             else
             {
@@ -109,11 +107,27 @@ namespace Outscal
             }
         }
 
-       public void PickUpKey()
-       {
+        public void PickUpKey()
+        {
             Debug.Log("Player picked the Key");
             _scoreController.IncrementScore(10);
-       }
+        }
 
+        public void KillPlayer()
+        {
+            Debug.Log("Player Got Hit");
+            _animator.SetBool("Dead", true);
+            ReLoadGame();
+
+
+        }
+
+        private void ReLoadGame()
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
+
+
+
