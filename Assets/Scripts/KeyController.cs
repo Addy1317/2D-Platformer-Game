@@ -12,7 +12,7 @@ namespace Outscal
         {
             if(collision.gameObject.GetComponent<PlayerController>() != null)
             {
-                Debug.Log("Key Interacted");
+                
                 PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
                 playerController.PickUpKey();
                 Destroy(gameObject);

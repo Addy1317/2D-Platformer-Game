@@ -6,66 +6,45 @@ namespace Outscal
 {
     public class EnemyController : MonoBehaviour
     {
-        [Header("Transform Reference")]
-        [SerializeField] private GameObject _pointA;
-        [SerializeField] private GameObject _pointB;
-        private Transform _currentPoint;
-
+      
         [Header("Patrolling Speed")]
         [SerializeField] private float _patrollingSpeed;
 
-        [Header("Physics Component")]
-        private Rigidbody2D _rigidbody2D;
+        [Header("Patrolling Direction")]
+        [SerializeField] private int _movingRight = 1;
+        [SerializeField] private GameObject _groundDetector;
+        [SerializeField] private float _rayDistance;
 
         [Header("Animator Component")]
-        [SerializeField] private Animator _animator;
-
-        private void Start()
-        {
-            _animator = gameObject.GetComponent<Animator>();
-            _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-           
-            _currentPoint = _pointB.transform;
-            _animator.SetBool("isPatrolling", true);
-        }
+        [SerializeField] private Animator _enemyAnimator;
 
         private void Update()
         {
-            EnemyPattrolling();
-          
+            
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.GetComponent<PlayerController>() != null)
             {
-                Debug.Log("Key Interacted");
-                PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
-                playerController.KillPlayer();
+                collision.transform.GetComponent<PlayerController>().DecreaseHealth();
+               // PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+               // playerController.KillPlayer();
             }
         }
 
-        private void EnemyPattrolling()
+        private void PatrolEnemy()
         {
-            Vector2 point = _currentPoint.position - transform.position;
+            _enemyAnimator.SetBool("isPatrol", true);
+            transform.Translate(_movingRight * Vector2.right * _patrollingSpeed * Time.deltaTime);
 
-            if (_currentPoint == _pointB.transform)
-            {
-                _rigidbody2D.velocity = new Vector2(_patrollingSpeed, 0);
-            }
-            else
-            {
-                _rigidbody2D.velocity = new Vector2(-_patrollingSpeed, 0);
-            }
+            RaycastHit2D hit = Physics2D.Raycast(_groundDetector.transform.position, Vector2.down, _rayDistance);
 
-            if( Vector2.Distance(transform.position , _currentPoint.position) < 0.5f && _currentPoint == _pointB.transform)
+            if (!hit)
             {
-                _currentPoint = _pointA.transform;
-            }
-
-            if (Vector2.Distance(transform.position, _currentPoint.position) < 0.5f && _currentPoint == _pointA.transform)
-            {
-                _currentPoint = _pointB.transform;
+                transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                _movingRight = _movingRight * -1;
             }
         }
+        
     }
 }

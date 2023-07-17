@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Outscal
 {
@@ -9,18 +10,31 @@ namespace Outscal
         [SerializeField] private Animator _animator;
         [SerializeField] private float _speed;
 
+        [Header("Player Health")]
+        [SerializeField] private int _playerHealth = 3;
+        [SerializeField] private int _heartCount;
+        [SerializeField] private bool _isDead;
+        [SerializeField] private Transform _startPosition;
+
         [Header("Physics Component")]
         [SerializeField] private float _jumpForce;
         private bool _isGrounded = true;
         private Rigidbody2D _rigidbody2D;
         private BoxCollider2D _boxcollider2D;
+        private Camera _mainCamera;
+
+        [Header("Death UI")]
+        [SerializeField] private GameObject _deathUIPanel;
+        [SerializeField] private Image [] hearts;
 
         [Header("Score Attributes")]
         [SerializeField] private ScoreController _scoreController;
+
         private void Awake()
         {
             _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
             _boxcollider2D = gameObject.GetComponent<BoxCollider2D>();
+            _mainCamera = gameObject.GetComponent<Camera>();
         }
         private void Update()
         {
@@ -115,16 +129,65 @@ namespace Outscal
 
         public void KillPlayer()
         {
-            Debug.Log("Player Got Hit");
-            _animator.SetBool("Dead", true);
-            ReLoadGame();
-
-
+                _animator.SetBool("Dead", true);
+                ReLoadGame();
         }
 
         private void ReLoadGame()
         {
             SceneManager.LoadScene(0);
+        }
+
+        public void DecreaseHealth()
+        {
+            _playerHealth--;
+            HandleHealthUI();
+            if (_playerHealth <= 0)
+            {
+                PlayDeathAnimation();
+                PlayerDeath();
+            }
+            else
+            {
+                transform.position = _startPosition.position;
+            }
+        }
+
+        public void PlayerDeath()
+        {
+            _isDead = true;
+            _mainCamera.transform.parent = null;
+            _deathUIPanel.gameObject.SetActive(true);
+            _rigidbody2D.constraints = RigidbodyConstraints2D.FreezePosition;
+            ReloadLevel();
+        }
+
+        public void PlayDeathAnimation()
+        {
+           _animator.SetTrigger("Die");
+        }
+
+        private void ReloadLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void HandleHealthUI()
+        {
+            for (int i = 0; i < hearts.Length; i++)
+            {
+                //i < _playerHealth ? hearts[i].color = Color.red : hearts[i].color = Color.black;
+
+                if( i <_playerHealth)
+                {
+                    hearts[i].color = Color.red;
+                }
+
+                else
+                {
+                    hearts[i].color = Color.black;
+                }
+            }
         }
     }
 }

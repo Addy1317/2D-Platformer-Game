@@ -2294,6 +2294,11 @@ PrefabInstance:
       propertyPath: _pointB
       value: 
       objectReference: {fileID: 582891994}
+    - target: {fileID: 338709373718211523, guid: c5b255c6b73faa949bce33b15dbcde35,
+        type: 3}
+      propertyPath: _patrollingSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2420903214941261528, guid: c5b255c6b73faa949bce33b15dbcde35,
         type: 3}
       propertyPath: m_GravityScale
@@ -2317,12 +2322,12 @@ PrefabInstance:
     - target: {fileID: 4297154662978189623, guid: c5b255c6b73faa949bce33b15dbcde35,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12
+      value: 5.01
       objectReference: {fileID: 0}
     - target: {fileID: 4297154662978189623, guid: c5b255c6b73faa949bce33b15dbcde35,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -2.42
       objectReference: {fileID: 0}
     - target: {fileID: 4297154662978189623, guid: c5b255c6b73faa949bce33b15dbcde35,
         type: 3}
