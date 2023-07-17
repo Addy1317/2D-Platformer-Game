@@ -18,17 +18,13 @@ namespace Outscal
         [Header("Animator Component")]
         [SerializeField] private Animator _enemyAnimator;
 
-        private void Update()
-        {
-            
-        }
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.GetComponent<PlayerController>() != null)
             {
-                collision.transform.GetComponent<PlayerController>().DecreaseHealth();
-               // PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
-               // playerController.KillPlayer();
+                //collision.transform.GetComponent<PlayerController>().DecreaseHealth();
+                PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+                playerController.KillPlayer();
             }
         }
 
@@ -44,7 +40,6 @@ namespace Outscal
                 transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 _movingRight = _movingRight * -1;
             }
-        }
-        
+        }       
     }
 }

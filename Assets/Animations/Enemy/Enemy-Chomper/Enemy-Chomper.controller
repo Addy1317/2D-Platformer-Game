@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isPatrolling
+    m_ConditionEvent: isPatrol
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3731322385948152649}
@@ -34,7 +34,7 @@ AnimatorController:
   m_Name: Enemy-Chomper
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: isPatrolling
+  - m_Name: isPatrol
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -170,7 +170,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isPatrolling
+    m_ConditionEvent: isPatrol
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3379025633977705338}

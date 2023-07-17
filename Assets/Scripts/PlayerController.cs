@@ -6,7 +6,7 @@ namespace Outscal
 {
     public class PlayerController : MonoBehaviour
     {
-        [Header("Animator Attributes")]
+        [Header("Player Animator")]
         [SerializeField] private Animator _animator;
         [SerializeField] private float _speed;
 
@@ -16,9 +16,11 @@ namespace Outscal
         [SerializeField] private bool _isDead;
         [SerializeField] private Transform _startPosition;
 
-        [Header("Physics Component")]
+        [Header("Player Jump Force")]
         [SerializeField] private float _jumpForce;
         private bool _isGrounded = true;
+
+        [Header("Physics Components")]
         private Rigidbody2D _rigidbody2D;
         private BoxCollider2D _boxcollider2D;
         private Camera _mainCamera;
@@ -27,8 +29,9 @@ namespace Outscal
         [SerializeField] private GameObject _deathUIPanel;
         [SerializeField] private Image [] hearts;
 
-        [Header("Score Attributes")]
+        [Header("Script Reference")]
         [SerializeField] private ScoreController _scoreController;
+        [SerializeField] private GameOverController _gameOverController;
 
         private void Awake()
         {
@@ -129,15 +132,13 @@ namespace Outscal
 
         public void KillPlayer()
         {
-                _animator.SetBool("Dead", true);
-                ReLoadGame();
+            _animator.SetBool("Dead", true);
+            _gameOverController.PlayerDied();
+            this.enabled = false;
+          
         }
 
-        private void ReLoadGame()
-        {
-            SceneManager.LoadScene(0);
-        }
-
+        /*
         public void DecreaseHealth()
         {
             _playerHealth--;
@@ -152,7 +153,7 @@ namespace Outscal
                 transform.position = _startPosition.position;
             }
         }
-
+        ?
         public void PlayerDeath()
         {
             _isDead = true;
@@ -189,6 +190,7 @@ namespace Outscal
                 }
             }
         }
+        */
     }
 }
 
