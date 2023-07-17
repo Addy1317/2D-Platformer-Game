@@ -9,11 +9,12 @@ namespace Outscal
     public class GameOverController : MonoBehaviour
     {
         [Header("Restart Button")]
-        public Button ButtonRestart;
-
+        [SerializeField] private Button ButtonRestart;
+        [SerializeField] private Button ButtonQuit;
         private void Awake()
         {
             ButtonRestart.onClick.AddListener(ReLoadLevel);
+            ButtonQuit.onClick.AddListener(QuitGame);
         }
         public void PlayerDied()
         {
@@ -25,6 +26,11 @@ namespace Outscal
             SceneManager.LoadScene(1);
         }
 
+        private void QuitGame()
+        {
+            Application.Quit();
+            Debug.Log("Quitting Application");
+        }
 
     }
 }
