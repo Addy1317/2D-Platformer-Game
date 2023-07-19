@@ -11,6 +11,7 @@ namespace Outscal
         [Header("Restart Button")]
         [SerializeField] private Button ButtonRestart;
         [SerializeField] private Button ButtonQuit;
+
         private void Awake()
         {
             ButtonRestart.onClick.AddListener(ReLoadLevel);
@@ -23,7 +24,8 @@ namespace Outscal
 
         private void ReLoadLevel()
         {
-            SceneManager.LoadScene(1);
+          Scene scene =  SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.buildIndex);
         }
 
         private void QuitGame()

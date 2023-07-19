@@ -13,6 +13,8 @@ namespace Outscal
         [SerializeField] private Button _playButton;
         [SerializeField] private Button _quitButton;
 
+        [Header("Level Selection Popup")]
+        [SerializeField] private GameObject _levelSelection;
         private void Awake()
         {
             _playButton.onClick.AddListener(PlayGame);
@@ -21,7 +23,8 @@ namespace Outscal
 
         private void PlayGame()
         {
-            SceneManager.LoadScene(1);
+            //SceneManager.LoadScene(1);
+            _levelSelection.SetActive(true);
         }
 
         private void QuitGame()
