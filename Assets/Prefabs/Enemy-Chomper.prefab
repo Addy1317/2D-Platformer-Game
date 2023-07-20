@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4297154662978189623
 Transform:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.2, y: 0.55}
@@ -146,10 +146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd190334a648e841a34cc3cfb7eba41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointA: {fileID: 0}
-  _pointB: {fileID: 0}
-  _patrollingSpeed: 2
-  _animator: {fileID: 1177753718}
+  _patrollingSpeed: 1
+  _movingRight: 1
+  _groundDetector: {fileID: 0}
+  _rayDistance: 1
+  _enemyAnimator: {fileID: 1177753718}
 --- !u!50 &2420903214941261528
 Rigidbody2D:
   serializedVersion: 4

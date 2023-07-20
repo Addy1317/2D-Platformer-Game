@@ -21,7 +21,23 @@ namespace Outscal
 
         private void onClick()
         {
-            SceneManager.LoadScene(_LevelName);
+            LevelStatus levelStatus = LevelManager.Instance.GetLevelStatus(_LevelName);
+            switch (levelStatus)
+            {
+                case LevelStatus.Locked:
+                    Debug.Log("Can't play yet");
+                    break;
+                case LevelStatus.Unlocked:
+                    SceneManager.LoadScene(_LevelName);
+                    break;
+                case LevelStatus.Completed:
+                    SceneManager.LoadScene(_LevelName);
+                    break;
+                default:
+                    break;
+            }
+          
+           // SceneManager.LoadScene(_LevelName);
 
         }
     }

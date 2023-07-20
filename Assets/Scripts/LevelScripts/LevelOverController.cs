@@ -13,6 +13,8 @@ namespace Outscal
             if(collision.gameObject.GetComponent<PlayerController>() != null)
             {
                 Debug.Log("Level Completed");
+               
+                LevelManager.Instance.MarkCurrentLevelCompleted();
             }
         }
     }

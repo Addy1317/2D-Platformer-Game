@@ -111,7 +111,7 @@ namespace Outscal
             if (other.transform.tag == "Platform")
             {
                 _isGrounded = true;
-                Debug.Log(_isGrounded + "TRUE");
+                //Debug.Log(_isGrounded + "TRUE");
             }
         }
 
@@ -125,8 +125,7 @@ namespace Outscal
         }
 
         public void PickUpKey()
-        {
-            Debug.Log("Player picked the Key");
+        {           
             _scoreController.IncrementScore(10);
         }
 
