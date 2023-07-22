@@ -279,5 +279,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 6699839268312825845}
   _speed: 5
+  _playerHealth: 3
+  _heartCount: 0
+  _isDead: 0
+  _startPosition: {fileID: 6155703052794142724}
   _jumpForce: 50
+  _deathUIPanel: {fileID: 0}
+  hearts: []
   _scoreController: {fileID: 0}
+  _gameOverController: {fileID: 0}

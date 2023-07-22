@@ -23,6 +23,7 @@ namespace Outscal
 
         private void PlayGame()
         {
+            SoundManager.Instance.Play(GameSounds.ButtonClick); 
             //SceneManager.LoadScene(1);
             _levelSelection.SetActive(true);
         }

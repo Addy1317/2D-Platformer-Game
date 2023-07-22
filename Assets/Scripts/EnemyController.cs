@@ -6,7 +6,7 @@ namespace Outscal
 {
     public class EnemyController : MonoBehaviour
     {
-      
+    
         [Header("Patrolling Speed")]
         [SerializeField] private float _patrollingSpeed;
 
@@ -18,6 +18,8 @@ namespace Outscal
         [Header("Animator Component")]
         [SerializeField] private Animator _enemyAnimator;
 
+        public ParticleController bombblast;
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.GetComponent<PlayerController>() != null)
@@ -25,6 +27,8 @@ namespace Outscal
                 //collision.transform.GetComponent<PlayerController>().DecreaseHealth();
                 PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
                 playerController.KillPlayer();
+                SoundManager.Instance.Play(GameSounds.BombBlast);
+                bombblast.PlayEffect();
             }
         }
 

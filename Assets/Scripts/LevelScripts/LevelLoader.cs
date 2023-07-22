@@ -28,9 +28,11 @@ namespace Outscal
                     Debug.Log("Can't play yet");
                     break;
                 case LevelStatus.Unlocked:
+                    SoundManager.Instance.Play(GameSounds.ButtonClick);
                     SceneManager.LoadScene(_LevelName);
                     break;
                 case LevelStatus.Completed:
+                    SoundManager.Instance.Play(GameSounds.ButtonClick);
                     SceneManager.LoadScene(_LevelName);
                     break;
                 default:

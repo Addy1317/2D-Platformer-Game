@@ -20,18 +20,19 @@ namespace Outscal
         public void PlayerDied()
         {
             gameObject.SetActive(true);
+            SoundManager.Instance.PlayMusic(GameSounds.PlayerDeath);
         }
 
         private void ReLoadLevel()
         {
-          Scene scene =  SceneManager.GetActiveScene();
+            Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.buildIndex);
         }
 
         private void QuitGame()
         {
             Application.Quit();
-            Debug.Log("Quitting Application");
+            // Debug.Log("Quitting Application");
         }
 
     }
